@@ -1,7 +1,6 @@
-namespace Az900_QuizApp;
+// ReSharper disable ConvertToUsingDeclaration
 
-using System;
-using System.IO;
+namespace Az900_QuizApp;
 
 public class ConvertNewQuestions
 {
@@ -13,15 +12,14 @@ public class ConvertNewQuestions
 
     private static void ReadAnswers(string file, int questionIndex)
     {
-        int questionId = questionIndex;
+        var questionId = questionIndex;
         try
         {
             // Open the file for reading using a StreamReader
-            using (StreamReader reader = new StreamReader(file))
+            using (var reader = new StreamReader(file))
             {
-                string line;
                 // Read and display lines from the file until the end is reached
-                while ((line = reader.ReadLine()) != null)
+                while (reader.ReadLine() is { } line)
                 {
                     var answer = line.Substring(4, 1);
                     Console.WriteLine(
@@ -42,23 +40,22 @@ public class ConvertNewQuestions
 
     private static void ReadQuestions(string questionFile, int questionIndex)
     {
-        int questionId = questionIndex;
+        var questionId = questionIndex;
         try
         {
             // Open the file for reading using a StreamReader
-            using (StreamReader reader = new StreamReader(questionFile))
+            using (var reader = new StreamReader(questionFile))
             {
-                string line;
                 // Read and display lines from the file until the end is reached
-                while ((line = reader.ReadLine()) != null)
+                while (reader.ReadLine() is { } line)
                 {
-                    var question = line.Substring(4);
+                    var question = line[4..];
                     var validLine = reader.ReadLine();
-                    var questionOption1 = validLine.Substring(3);
-                    var questionOption2 = reader.ReadLine().Substring(3);
-                    var questionOption3 = reader.ReadLine().Substring(3);
-                    var questionOption4 = reader.ReadLine().Substring(3);
-                    if (validLine.StartsWith("A") == false)
+                    var questionOption1 = validLine?[3..];
+                    var questionOption2 = reader.ReadLine()?[3..];
+                    var questionOption3 = reader.ReadLine()?[3..];
+                    var questionOption4 = reader.ReadLine()?[3..];
+                    if (validLine != null && validLine.StartsWith("A") == false)
                     {
                         Console.WriteLine($"Error on question: \n{question}\nOption 1 did not start with an A");
                         Console.ReadKey();
