@@ -579,6 +579,10 @@ namespace Az900_QuizApp
 
         static void Main(string[] args)
         {
+            /* ConvertNewQuestions.Convert("c:\\Users\\ghazkul\\Downloads\\AZ-900\\MoreQuestions_1.txt",
+                 "c:\\Users\\ghazkul\\Downloads\\AZ-900\\MoreQuestions_answer_1.txt", 51);
+             return;
+             */
             List<Question> quizQuestions = JsonSerializer.Deserialize<List<Question>>(quizQuestionsJson);
             List<Answer> answersData = JsonSerializer.Deserialize<List<Answer>>(answersDataJson);
 
