@@ -1447,6 +1447,7 @@
     const finalScoreDisplay = document.getElementById('final-score');
     const displayTotalQuestionsInResult = document.getElementById('total-questions');
     const displayTotalQuestionsOnTop = document.getElementById('total-questions2');
+    const questionCountTop = document.getElementById('totalQuestions');
     const questionIndex = document.getElementById('question-index');
     const restartButton = document.getElementById('restart-button');
 
@@ -1552,6 +1553,8 @@
     }
 
     function showFinalResults() {
+        questionCountTop.classList.add('hidden');
+        feedback.classList.add('hidden');
         questionContainer.classList.add('hidden');
         nextButton.classList.add('hidden');
         resultsContainer.classList.remove('hidden');
@@ -1562,9 +1565,11 @@
     function restartQuiz() {
         currentQuestionIndex = 0;
         score = 0;
+        scoreIndex = -1;
         userAnswers = [];
         answeredCorrectly = false;
         shuffledQuestions = null; // Reset shuffled questions
+        questionCountTop.classList.remove('hidden');
         resultsContainer.classList.remove('hidden');
         questionContainer.classList.remove('hidden');
         nextButton.classList.remove('hidden');
